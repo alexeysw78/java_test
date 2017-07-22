@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ant.JavaTest" default="compile">
+ <property file="build.properties" />
+
+ <!-- Удаление каталогов для сборки -->
+ <target name="clean">
+  <delete dir="${build.dir}" />
+  <delete dir="${dist.dir}" />
+ </target>
+
+ <!-- Создание каталогов для сборки -->
+ <target name="init" depends="clean">
+  <mkdir dir="${build.dir}" />
+ </target>
+ 
+ <!-- Компиляция классов -->
+ <target name="compile" description="compile java" depends="init">
+  <javac includeantruntime="false" destdir="${build.dir}" srcdir="${project.src.dir}" />
+ </target> 
+ 
+ <!-- Сборка jar -->
+ <target name="dist" description="generate the distribution" depends="compile">
+  <mkdir dir="${dist.dir}/${dist.name}" />
+   <jar jarfile="${dist.dir}/${dist.name}/${build.jar.name}" basedir="${build.dir}" />
+ </target>
+ 
+</project>
